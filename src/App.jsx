@@ -3,6 +3,7 @@ import "./App.css";
 import Nav from "./components/navBar/Nav";
 import Titulo from "./components/titulo/Titulo";
 import Card from "./components/cards/Card";
+import Buscador from "./components/buscador/Buscador";
 
 function App() {
   // La variable data es la que va a almacenar los datos de "stays.json" y setData nos ayudará a guardar esos datos en esa variable. Es necesario que inicialicemos esa variable como un array vacío para evitar errores.
