@@ -29,6 +29,9 @@ function App() {
 
   // Puedes ver la variable data en consola.
   console.log(data);
+  function mostrarBuscador(){
+    
+  }
   return (
     <>
     {/* Aquí te dejo un ejemplo de cómo podrías imprimir varios elementos a la vez. }

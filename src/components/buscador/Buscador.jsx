@@ -3,7 +3,7 @@ import './Buscador.css'
 export default function Buscador(){
     return(
         <div className="buscador">
-            <div className='contenedor-buscador'>
+            <div className='contenedor-buscador-entradas'>
                 <div className='todos-buscadores'>
                     <div className='div-buscarExtendido'>
                         <div className='buscador-titulo'>
