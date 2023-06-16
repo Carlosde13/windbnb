@@ -32,6 +32,14 @@ function App() {
   function mostrarBuscador(){
     
   }
+  const [busqueda, setBusqueda] = useState(false);
+
+  function mostrarBuscador(){
+    let newEstadoBusqueda = !busqueda;
+    setBusqueda(newEstadoBusqueda)
+    console.log(newEstadoBusqueda);
+  }
+
   return (
     <>
     {/* Aquí te dejo un ejemplo de cómo podrías imprimir varios elementos a la vez. }
@@ -39,13 +47,21 @@ function App() {
         return <h1 key={i}>{el.city}</h1>;
       })*/}
       <main className="contenedorPrincipal">
-        <Nav></Nav>
+        <Nav accion={mostrarBuscador} estado={busqueda} arreglo={data}></Nav>
         <Titulo></Titulo>
-        <section className="staysResults">
+        {busqueda? (
+          <section className="staysResults" onClick={mostrarBuscador}>
             {data.map((el, i) => {
               return <Card key={i} photo={el.photo} superHost={el.superHost} type={el.type} beds={el.beds} rating={el.rating} title={el.title}> </Card>;
             })}
-        </section>
+          </section>
+        ) : (
+          <section className="staysResults">
+            {data.map((el, i) => {
+              return <Card key={i} photo={el.photo} superHost={el.superHost} type={el.type} beds={el.beds} rating={el.rating} title={el.title}> </Card>;
+            })}
+          </section>
+        )}
       </main>
     </>
   );

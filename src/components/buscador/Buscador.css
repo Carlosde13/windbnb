@@ -1,10 +1,17 @@
 .buscador{
+    
     width: 100%;
-    height: auto;
+    height: 50vh;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    flex-direction: column;
     margin-bottom: 50px;
+    padding-top: 50px;
+    position:fixed;
+    top: 0;
+    z-index: 10;
+    background-color: white;
 }
 .contenedor-buscador-entradas{
     width: 80%;
@@ -89,4 +96,20 @@
     font-weight: 400;
     font-size: 16px;
     color: #F2F2F2;
+}
+.coincidencias-busqueda{
+    width: 40%;
+    margin-top: 20px;
+}
+.coincidencia{
+    list-style-type: none;
+    height: 50px;
+}
+.contenedor-coincidencia >a{
+    text-decoration: none; 
+    font-family:"Mulish", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #4F4F4F;
 }
