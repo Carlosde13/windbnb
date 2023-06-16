@@ -6,7 +6,7 @@ export default function Nav({accion , estado, arreglo}) {
   return (
     <nav id="nav">
       <div className="iconoPrincipal">
-        <img src="src\img\logo.svg" alt="web page logo" id='windbnb-icon'/>
+        <img src="../../../public/logo.svg" alt="web page logo" id='windbnb-icon'/>
       </div>
       <div className="searchAll">
         <input placeholder="Add Location" id="input-location" className="input" onClick={accion}></input>
