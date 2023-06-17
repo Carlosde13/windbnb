@@ -1,12 +1,12 @@
 import Buscador from "../buscador/Buscador";
 import "./Nav.css"
 
-export default function Nav({accion , estado, arreglo}) {
-  if (estado==true) return <Buscador arreglo={arreglo}/>
+export default function Nav({accion}) {
+  
   return (
     <nav id="nav">
       <div className="iconoPrincipal">
-        <img src="../../../public/logo.svg" alt="web page logo" id='windbnb-icon'/>
+        <img src="src\img\logo.svg" alt="web page logo" id='windbnb-icon'/>
       </div>
       <div className="searchAll">
         <input placeholder="Add Location" id="input-location" className="input" onClick={accion}></input>

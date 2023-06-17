@@ -47,6 +47,7 @@ function App() {
         return <h1 key={i}>{el.city}</h1>;
       })*/}
       <main className="contenedorPrincipal">
+        <Buscador arreglo={data} estado={busqueda}/>
         <Nav accion={mostrarBuscador} estado={busqueda} arreglo={data}></Nav>
         <Titulo></Titulo>
         {busqueda? (

@@ -1,7 +1,7 @@
 .buscador{
-    
+    transform: scale(1);
     width: 100%;
-    height: 50vh;
+    min-height: 50vh;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -12,6 +12,14 @@
     top: 0;
     z-index: 10;
     background-color: white;
+    transition: .8s ease;
+}
+.buscadorEscondido{
+    transform: scale(0);
+    transition: .8s ease;
+    position:fixed;
+    top: 0;
+    z-index: 10;
 }
 .contenedor-buscador-entradas{
     width: 80%;
@@ -112,4 +120,70 @@
     font-weight: 400;
     font-size: 14px;
     color: #4F4F4F;
+}
+.buscador-parte-inferior{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+#coincidencias-busqueda{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+.add-guests-buttons{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.add-guests-buttons-division{
+    width: 80%;
+    height: fit-content;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.add-guests-buttons-division>h4{
+    font-family: "Mulish", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333333;
+}
+.add-guests-buttons-division>small{
+    font-family: "Mulish", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #BDBDBD;
+}
+.seccion-botones-suma{
+    width: 18%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px
+}
+.seccion-botones-suma >p{
+    font-family: "Mulish", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #333333;
+    border-left: 5px;
+    border-right: 5px;
+}
+.seccion-botones-suma >button{
+    width: 23px;
+    height: 23px;
+    border: 1px solid #828282;
+    border-radius: 4px;
+    background-color: white;
+}
+.seccion-botones-suma >button:hover{
+    cursor: pointer;
 }
