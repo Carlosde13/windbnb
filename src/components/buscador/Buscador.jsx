@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "./Buscador.css";
 
-export default function Buscador({ arreglo, estado }) {
+export default function Buscador({ arreglo, estado, accionBuscador }) {
   const [lista, setLista] = useState([]);
 
   const [noAdultos, setNoAdultos] = useState (0);
-  console.log(noAdultos)
+  const [noNinos, setNoNinos] = useState (0);
+  const [totalGuests, setTotatGuests] = useState (0);
+  const [estadoAG, setEstadoAG] = useState (false)
 
   const filterList = (e) => {
     let inputValue = e.target.value.toLowerCase();
@@ -20,22 +22,57 @@ export default function Buscador({ arreglo, estado }) {
       setLista(FILTERED);
     }
   };
+  let sumarAdultos = (noAdultos)=>{
+    let newNoAdultos;
+    newNoAdultos = noAdultos+1;
+    calcularNoPersonas(newNoAdultos, noNinos);
+    setNoAdultos(newNoAdultos);
+  }
+  let restarAdultos = (noAdultos)=>{
+    if (noAdultos==0) return noAdultos;
+    let newNoAdultos;
+    newNoAdultos = noAdultos-1;
+    calcularNoPersonas(newNoAdultos, noNinos);
+    setNoAdultos(newNoAdultos);
+  }
+  let sumarNinos = (noNinos)=>{
+    let newNoNinos;
+    newNoNinos = noNinos+1;
+    calcularNoPersonas(noAdultos, newNoNinos);
+    setNoNinos(newNoNinos);
+  }
+  let restarNinos = (noNinos)=>{
+    if (noNinos==0) return noNinos;
+    let newNoNinos;
+    newNoNinos = noNinos-1;
+    calcularNoPersonas(noAdultos, newNoNinos);
+    setNoNinos(newNoNinos);
+  }
+  function calcularNoPersonas (adultos, ninos){
+    let resultado = adultos + ninos;
+    setTotatGuests(resultado);
+  }
+  function mostrarSeccionAG(){
+    let newEstado = !estadoAG;
+    setEstadoAG(newEstado)
+  }
+
   let claseBuscador;
   if (estado == true) {
     claseBuscador = "buscador";
   } else {
     claseBuscador = "buscadorEscondido";
   }
-  let sumarAdultos = (noAdultos)=>{
-    let newNoAdultos;
-    newNoAdultos = noAdultos+1;
-    setNoAdultos(newNoAdultos);
+
+  let cuadroGris;
+  if(estado==true){
+    cuadroGris = "cuadroGrisDesplegado"
+  }else{
+    cuadroGris = "cuadroGrisEscondido"
   }
-  let restarAdultos = (noAdultos)=>{
-    let newNoAdultos;
-    newNoAdultos = noAdultos-1;
-    setNoAdultos(newNoAdultos);
-  }
+  
+  let claseAG;
+  estadoAG ? claseAG = 'add-guests-buttons-division' : claseAG = 'add-guests-buttons-division-escondido'
   return (
     <>
       <div className={claseBuscador}>
@@ -51,14 +88,13 @@ export default function Buscador({ arreglo, estado }) {
                 onKeyUp={filterList}
               ></input>
             </div>
-            <div className="div-buscarExtendido">
+            <div className="div-buscarExtendido" id="noTotalGuests" onClick={mostrarSeccionAG}>
               <div className="buscador-titulo">
                 <small>Guests</small>
               </div>
-              <input
-                className="input-location-guests"
-                placeholder="Add guests"
-              ></input>
+              <p
+                id="total-guests-out"
+              > {totalGuests} </p>
             </div>
             <button id="boton-buscarExtendido">
               <div className="contenedor-icono-buscarExtendido">
@@ -91,26 +127,29 @@ export default function Buscador({ arreglo, estado }) {
             ))}
           </ul>
           <div className="add-guests-buttons">
-            <div className="add-guests-buttons-division">
+            <div className={claseAG}>
               <h4>Adults</h4>
               <small>Ages 13 or above</small>
               <div className="seccion-botones-suma">
                 <button onClick={()=>{restarAdultos(noAdultos)}}>-</button>
-                <p>{noAdultos}</p>
+                <p> {noAdultos} </p>
                 <button onClick={()=>{sumarAdultos(noAdultos)}}>+</button>
               </div>
             </div>
-            <div className="add-guests-buttons-division">
+            <div className={claseAG}>
               <h4>Children</h4>
               <small>Ages 2-12</small>
               <div className="seccion-botones-suma">
-                <button>-</button>
-                <p>0</p>
-                <button>+</button>
+                <button onClick={()=>{restarNinos(noNinos)}}>-</button>
+                <p> {noNinos} </p>
+                <button onClick={()=>{sumarNinos(noNinos)}}>+</button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className={cuadroGris} onClick={accionBuscador}>
+
       </div>
     </>
   );

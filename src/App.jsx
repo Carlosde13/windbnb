@@ -29,9 +29,6 @@ function App() {
 
   // Puedes ver la variable data en consola.
   console.log(data);
-  function mostrarBuscador(){
-    
-  }
   const [busqueda, setBusqueda] = useState(false);
 
   function mostrarBuscador(){
@@ -47,22 +44,14 @@ function App() {
         return <h1 key={i}>{el.city}</h1>;
       })*/}
       <main className="contenedorPrincipal">
-        <Buscador arreglo={data} estado={busqueda}/>
-        <Nav accion={mostrarBuscador} estado={busqueda} arreglo={data}></Nav>
+        <Buscador arreglo={data} estado={busqueda} accionBuscador={mostrarBuscador}/>
+        <Nav accion={mostrarBuscador}></Nav>
         <Titulo></Titulo>
-        {busqueda? (
-          <section className="staysResults" onClick={mostrarBuscador}>
-            {data.map((el, i) => {
-              return <Card key={i} photo={el.photo} superHost={el.superHost} type={el.type} beds={el.beds} rating={el.rating} title={el.title}> </Card>;
-            })}
-          </section>
-        ) : (
           <section className="staysResults">
             {data.map((el, i) => {
               return <Card key={i} photo={el.photo} superHost={el.superHost} type={el.type} beds={el.beds} rating={el.rating} title={el.title}> </Card>;
             })}
           </section>
-        )}
       </main>
     </>
   );
