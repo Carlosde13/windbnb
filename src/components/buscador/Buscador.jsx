@@ -1,15 +1,18 @@
 import { useState } from "react";
 import "./Buscador.css";
+import Nav from "../navBar/Nav";
+import Titulo from "../titulo/Titulo";
+import Resultados from "../resultados/Resultados";
 
 export default function Buscador({ arreglo, estado, accionBuscador }) {
   const [lista, setLista] = useState([]);
 
-  const [noAdultos, setNoAdultos] = useState (0);
-  const [noNinos, setNoNinos] = useState (0);
-  const [totalGuests, setTotatGuests] = useState (0);
-  const [estadoAG, setEstadoAG] = useState (false)
+  const [noAdultos, setNoAdultos] = useState(0);
+  const [noNinos, setNoNinos] = useState(0);
+  const [totalGuests, setTotatGuests] = useState(0);
+  const [estadoAG, setEstadoAG] = useState(false);
 
-  const filterList = (e) => {
+  const filtrarLista = (e) => {
     let inputValue = e.target.value.toLowerCase();
 
     if (inputValue === "") {
@@ -22,39 +25,39 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
       setLista(FILTERED);
     }
   };
-  let sumarAdultos = (noAdultos)=>{
+  let sumarAdultos = (noAdultos) => {
     let newNoAdultos;
-    newNoAdultos = noAdultos+1;
+    newNoAdultos = noAdultos + 1;
     calcularNoPersonas(newNoAdultos, noNinos);
     setNoAdultos(newNoAdultos);
-  }
-  let restarAdultos = (noAdultos)=>{
-    if (noAdultos==0) return noAdultos;
+  };
+  let restarAdultos = (noAdultos) => {
+    if (noAdultos == 0) return noAdultos;
     let newNoAdultos;
-    newNoAdultos = noAdultos-1;
+    newNoAdultos = noAdultos - 1;
     calcularNoPersonas(newNoAdultos, noNinos);
     setNoAdultos(newNoAdultos);
-  }
-  let sumarNinos = (noNinos)=>{
+  };
+  let sumarNinos = (noNinos) => {
     let newNoNinos;
-    newNoNinos = noNinos+1;
+    newNoNinos = noNinos + 1;
     calcularNoPersonas(noAdultos, newNoNinos);
     setNoNinos(newNoNinos);
-  }
-  let restarNinos = (noNinos)=>{
-    if (noNinos==0) return noNinos;
+  };
+  let restarNinos = (noNinos) => {
+    if (noNinos == 0) return noNinos;
     let newNoNinos;
-    newNoNinos = noNinos-1;
+    newNoNinos = noNinos - 1;
     calcularNoPersonas(noAdultos, newNoNinos);
     setNoNinos(newNoNinos);
-  }
-  function calcularNoPersonas (adultos, ninos){
+  };
+  function calcularNoPersonas(adultos, ninos) {
     let resultado = adultos + ninos;
     setTotatGuests(resultado);
   }
-  function mostrarSeccionAG(){
+  function mostrarSeccionAG() {
     let newEstado = !estadoAG;
-    setEstadoAG(newEstado)
+    setEstadoAG(newEstado);
   }
 
   let claseBuscador;
@@ -65,16 +68,20 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
   }
 
   let cuadroGris;
-  if(estado==true){
-    cuadroGris = "cuadroGrisDesplegado"
-  }else{
-    cuadroGris = "cuadroGrisEscondido"
+  if (estado == true) {
+    cuadroGris = "cuadroGrisDesplegado";
+  } else {
+    cuadroGris = "cuadroGrisEscondido";
   }
-  
+
   let claseAG;
-  estadoAG ? claseAG = 'add-guests-buttons-division' : claseAG = 'add-guests-buttons-division-escondido'
+  estadoAG
+    ? (claseAG = "add-guests-buttons-division")
+    : (claseAG = "add-guests-buttons-division-escondido");
   return (
     <>
+      <Nav accion={accionBuscador}></Nav>
+      <Titulo></Titulo>
       <div className={claseBuscador}>
         <div className="contenedor-buscador-entradas">
           <div className="todos-buscadores">
@@ -85,16 +92,18 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
               <input
                 className="input-location-guests"
                 placeholder="Add location"
-                onKeyUp={filterList}
+                onKeyUp={filtrarLista}
               ></input>
             </div>
-            <div className="div-buscarExtendido" id="noTotalGuests" onClick={mostrarSeccionAG}>
+            <div
+              className="div-buscarExtendido"
+              id="noTotalGuests"
+              onClick={mostrarSeccionAG}
+            >
               <div className="buscador-titulo">
                 <small>Guests</small>
               </div>
-              <p
-                id="total-guests-out"
-              > {totalGuests} </p>
+              <p id="total-guests-out"> {totalGuests} </p>
             </div>
             <button id="boton-buscarExtendido">
               <div className="contenedor-icono-buscarExtendido">
@@ -131,26 +140,49 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
               <h4>Adults</h4>
               <small>Ages 13 or above</small>
               <div className="seccion-botones-suma">
-                <button onClick={()=>{restarAdultos(noAdultos)}}>-</button>
+                <button
+                  onClick={() => {
+                    restarAdultos(noAdultos);
+                  }}
+                >
+                  -
+                </button>
                 <p> {noAdultos} </p>
-                <button onClick={()=>{sumarAdultos(noAdultos)}}>+</button>
+                <button
+                  onClick={() => {
+                    sumarAdultos(noAdultos);
+                  }}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className={claseAG}>
               <h4>Children</h4>
               <small>Ages 2-12</small>
               <div className="seccion-botones-suma">
-                <button onClick={()=>{restarNinos(noNinos)}}>-</button>
+                <button
+                  onClick={() => {
+                    restarNinos(noNinos);
+                  }}
+                >
+                  -
+                </button>
                 <p> {noNinos} </p>
-                <button onClick={()=>{sumarNinos(noNinos)}}>+</button>
+                <button
+                  onClick={() => {
+                    sumarNinos(noNinos);
+                  }}
+                >
+                  +
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className={cuadroGris} onClick={accionBuscador}>
-
-      </div>
+      <div className={cuadroGris} onClick={accionBuscador}></div>
+      <Resultados datos={arreglo}/>
     </>
   );
 }
