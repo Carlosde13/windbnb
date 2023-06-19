@@ -1,6 +1,7 @@
 
 .buscador{
-    transform: scale(1);
+    /*transform: scale(1);*/
+    transform: translateY(0);
     width: 100%;
     min-height: 50vh;
     display: flex;
@@ -13,29 +14,32 @@
     top: 0;
     z-index: 10;
     background-color: white;
-    transition: .8s ease;
+    transition: .8s ease-in-out;
 }
 .buscadorEscondido{
-    transform: scale(0);
-    transition: .8s ease;
+    /*transform: scale(0);*/
+    transform: translateY(-100%);
+    transition: 1s ease-in-out;
     position:fixed;
     top: 0;
     z-index: 10;
 }
 .cuadroGrisDesplegado{
-    transform: scale(1);
+    /*transform: scale(1);*/
+    transform: translateY(0);
     width: 100%;
     min-height: 50vh;;
     position:fixed;
     top: 50vh;
-    z-index: 10;
+    z-index: 5;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0.9;
-    transition: .8s ease;
+    transition: .8s ease-in-out;
 }
 .cuadroGrisEscondido{
-    transform: scale(0);
-    transition: .8s ease;
+    /*transform: scale(0);*/
+    transform: translateY(-100%);
+    transition: 1s ease-in-out;
     position:fixed;
     top: 0;
     z-index: 10;
@@ -142,6 +146,9 @@
 .coincidencias-busqueda{
     width: 40%;
     margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 .coincidencia{
     list-style-type: none;
@@ -159,6 +166,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    min-height: 50vh;
+    background-color: transparent;
 }
 #coincidencias-busqueda{
     width: 40%;
@@ -176,6 +185,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
 }
 .add-guests-buttons-division{
     width: 80%;
@@ -186,22 +196,26 @@
     gap: 10px;
     transform: scale(1);
     transition: .5s ease-in-out;
+    background-color: transparent;
 }
 .add-guests-buttons-division-escondido{
     transform: scale(0);
     transition: .3s ease;
+    background-color: transparent;
 }
 .add-guests-buttons-division>h4{
     font-family: "Mulish", sans-serif;
     font-weight: 700;
     font-size: 14px;
     color: #333333;
+    background-color: transparent;
 }
 .add-guests-buttons-division>small{
     font-family: "Mulish", sans-serif;
     font-weight: 400;
     font-size: 14px;
     color: #BDBDBD;
+    background-color: transparent;
 }
 .seccion-botones-suma{
     width: 18%;

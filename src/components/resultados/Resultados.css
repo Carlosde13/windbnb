@@ -1,8 +1,9 @@
 .staysResults{
-    width: 90%;
+    width: 1300px;
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
-    gap: 100px;
+    justify-content:flex-start;
+    gap: 50px;
     margin-bottom: 100px;
 }

@@ -11,18 +11,24 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
   const [noNinos, setNoNinos] = useState(0);
   const [totalGuests, setTotatGuests] = useState(0);
   const [estadoAG, setEstadoAG] = useState(false);
+  const [sinResultados, setSinResultados] = useState (false);
 
   const filtrarLista = (e) => {
     let inputValue = e.target.value.toLowerCase();
 
     if (inputValue === "") {
       setLista([]);
+      setSinResultados(false);
     } else {
-      const FILTERED = arreglo.filter((el) => {
+        const filtrado = arreglo.filter((el) => {
         return el.city.toLowerCase().includes(inputValue);
-      });
 
-      setLista(FILTERED);
+    });
+    
+    if(filtrado.length==0){
+      setSinResultados(true);
+    }
+      setLista(filtrado);
     }
   };
   let sumarAdultos = (noAdultos) => {
@@ -78,10 +84,11 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
   estadoAG
     ? (claseAG = "add-guests-buttons-division")
     : (claseAG = "add-guests-buttons-division-escondido");
+  let conteo = lista.length;
   return (
     <>
       <Nav accion={accionBuscador}></Nav>
-      <Titulo></Titulo>
+      <Titulo numero={conteo}></Titulo>
       <div className={claseBuscador}>
         <div className="contenedor-buscador-entradas">
           <div className="todos-buscadores">
@@ -105,7 +112,7 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
               </div>
               <p id="total-guests-out"> {totalGuests} </p>
             </div>
-            <button id="boton-buscarExtendido">
+            <button id="boton-buscarExtendido" onClick={accionBuscador}>
               <div className="contenedor-icono-buscarExtendido">
                 <span class="material-symbols-outlined">search</span>
               </div>
@@ -134,6 +141,20 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
                 </div>
               </li>
             ))}
+            {sinResultados ? (
+                                <li className="coincidencia">
+                                <div className="contenedor-coincidencia">
+                                <span class="material-symbols-outlined">
+                                    wrong_location
+                                </span>
+                                  <a href="#">
+                                    No Results
+                                  </a>
+                                </div>
+                                </li>
+                              ):
+                              (<></>)
+            }
           </ul>
           <div className="add-guests-buttons">
             <div className={claseAG}>
@@ -182,7 +203,14 @@ export default function Buscador({ arreglo, estado, accionBuscador }) {
         </div>
       </div>
       <div className={cuadroGris} onClick={accionBuscador}></div>
-      <Resultados datos={arreglo}/>
+      {lista.length == 0 ? (
+        <Resultados datos={arreglo} invitados={totalGuests}/>
+      ):(
+        <Resultados datos={lista} invitados={totalGuests}/>
+      )
+      
+    }
+      
     </>
   );
 }
